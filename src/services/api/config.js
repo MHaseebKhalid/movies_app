@@ -1,19 +1,12 @@
 import axios from 'axios';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import Preference from 'react-native-preference';
 import Qs from 'qs';
+import Config from "react-native-config";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// import { showErrorMsg } from '../utils'
 
-const ServerURL = 'https://dev.letribe.com';
-const LiveURL = 'https://api.letribe.com';
-const local = 'http://192.168.50.198:8000';
-const ngURL='https://26c6-180-92-147-86.ap.ngrok.io';
+const ROOT_URL = Config.API_URL;
 
-const ROOT_URL = __DEV__ ? LiveURL : LiveURL;
-
-const BASE_URL = `${ROOT_URL}/api/v1`;
+const BASE_URL = `${ROOT_URL}`;
 
 const client = axios.create({
   baseURL: BASE_URL,
