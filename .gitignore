@@ -71,3 +71,7 @@ builds/
 fastlane/report.xml
 *.hprof
 ios/Podfile.lock
+
+
+#environment
+.env

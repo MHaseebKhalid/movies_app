@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import Config from "react-native-config";
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -57,6 +58,8 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  console.log("🚀 ~ App ~ Config.API_URL;:", Config.API_URL)
+
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
