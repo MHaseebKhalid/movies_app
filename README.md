@@ -1,8 +1,23 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+
+
+
+https://github.com/MHaseebKhalid/movies_app/assets/38959887/2dc2abfc-caa8-4342-9c61-63b8a14c89b3
+
+
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+>**Note**: This app is dependant to .env you can create your own .env and add these 
+API_URL = 'https://api.themoviedb.org/3'
+
+API_KEY = '----------'
+
+API_ACCESS_TOKEN = '-------'
+
+IMAGE_URL = 'https://image.tmdb.org/t/p/'
+
+from https://www.themoviedb.org/ 
+OR you can request me for the .env file
 
 ## Step 1: Start the Metro Server
 
