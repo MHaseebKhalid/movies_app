@@ -4,9 +4,13 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 >**Note**: This app is dependant to .env you can create your own .env and add these 
 API_URL = 'https://api.themoviedb.org/3'
+
 API_KEY = '----------'
+
 API_ACCESS_TOKEN = '-------'
+
 IMAGE_URL = 'https://image.tmdb.org/t/p/'
+
 from https://www.themoviedb.org/ 
 OR you can request me for the .env file
 
