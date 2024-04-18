@@ -1,33 +1,63 @@
 import React, { useState,useEffect } from "react";
 import PropTypes from "prop-types";
-import { Text, View, StyleSheet, FlatList } from "react-native";
+import { Text, View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import {MoviesPosterandInfo} from '../../components'
 import { styles } from "./styles";
+import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from "../../redux/movieSlice/movieSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { commonStyles } from "../../constants/commonStyles";
+import { heightPercentageToDP } from "react-native-responsive-screen";
+
+
+const movieTypes = {
+  1: 'trendingMovies',
+  2: 'upComingMovies',
+  3: 'topRatedMovies'
+};
+
+const fetchActions = {
+  1: fetchTrendingMovies,
+  2: fetchUpcomingMovies,
+  3: fetchTopRatedMovies
+};
 
 export const MovieListScreen=(props)=>{
     const {navigation,route}=props;
-    const { title, type } = route.params;
+    const { title, type,key } = route.params;
+    const dispatch = useDispatch();
 
-    const [page, setPage] = useState(1)
+    const { moviesReducer } = useSelector(state=>state)
+
     const [data, setData] = useState(route.params.data)
 
-  const onReachEnd = async () => {
-    const page = { page: page + 1 };
+    useEffect(() => {
+      const key = movieTypes[type];
+      const movies = moviesReducer[key]?.results || [];
+      setData(movies);
+    }, [moviesReducer]);
+    
 
-    // const fetchUrl = fetchFunctionListScreen(type, title);
-    // const response = await fetchUrl(page);
-
-    // if (response) {
-    //   this.setState((prevState) => ({ page: prevState.page + 1, data: [...prevState.data, ...response.results] }));
-    // }
-  };
+    const onReachEnd = async () => {
+      const key = movieTypes[type];
+      const currentPage = moviesReducer[key]?.page;
+      const totalPages = moviesReducer[key]?.total_pages;
+    
+      if (currentPage !== totalPages) {
+        const fetchMoreMovies = fetchActions[type];
+        dispatch(fetchMoreMovies(currentPage + 1)).then((res) => {
+          // setData(existingMovies => [...existingMovies, ...res.payload.results]);
+        })
+      }
+    };
 
   const MovieList = ({ results, navigation, type, onReachEnd }) => {
     return (
       <FlatList
-        keyExtractor={(item) => item.id.toString()}
-        keyboardShouldPersistTaps={"handled"}
+        keyExtractor={(item,index) => item.id.toString()}
+        // keyboardShouldPersistTaps={"handled"}
         data={results}
         renderItem={({ item }) => <MoviesPosterandInfo data={item} navigation={navigation} type={type} />}
         contentContainerStyle={{ marginVertical: 8 }}
@@ -41,8 +71,10 @@ export const MovieListScreen=(props)=>{
     return (
       <View>
         <View style={{ flexDirection: "row", marginTop: 24 }}>
-          {/* <BackIcon style={{ flex: 1, paddingLeft: 12, alignSelf: "flex-start" }} navigation={navigation} /> */}
-          <Text style={styles.headerTitle}>{`${title} ${type === "tv" ? "TV Show" : "Movies"}`}</Text>
+          <TouchableOpacity onPress={()=>navigation.goBack()}>
+          <AntDesign name="left" size={heightPercentageToDP(3)} colors={commonStyles.colors.black} style={{paddingHorizontal:12}}/>
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>{`${title}`}</Text>
           <View style={{ flex: 1, paddingRight: 12 }}></View>
         </View>
         <View style={styles.titleBar} />
@@ -51,7 +83,7 @@ export const MovieListScreen=(props)=>{
   };
 
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1,backgroundColor:commonStyles.colors.white}}>
         {renderTitle()}
         <MovieList results={data} navigation={navigation} onReachEnd={onReachEnd} type={type} />
       </View>

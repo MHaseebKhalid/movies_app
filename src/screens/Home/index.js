@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Header } from '../../components';
 import { styles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomingMovies } from '../../redux/movieSlice/movieSlice';
 
 import {MoviesRow} from '../../components'
@@ -11,34 +12,31 @@ import {MoviesRow} from '../../components'
 export const HomeScreen=(props)=> {
   let {navigation}=props;
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
   const { moviesReducer } = useSelector(state=>state)
-  console.log("🚀 ~ HomeScreen ~ moviesReducer:", moviesReducer)
 
   const [loading, setloading] = useState(false)
   const [trendingMovies, settrendingMovies] = useState([])
   const [upcomingMovies, setupcomingMovies] = useState([])
   const [topRated, settopRated] = useState([])
 
-  const MovieTypes = ["Trending", "Upcoming", "Top Rated"];
-
-
   useEffect(() => {
     refreshList()
-  }, [])
+  }, [isFocused])
 
   useEffect(() => {
     setloading(moviesReducer?.loading)
 
-    settrendingMovies(moviesReducer?.trendingMovies)
-    setupcomingMovies(moviesReducer?.upComingMovies)
-    settopRated(moviesReducer?.topRatedMovies)
+    settrendingMovies(moviesReducer?.trendingMovies?.results)
+    setupcomingMovies(moviesReducer?.upComingMovies?.results)
+    settopRated(moviesReducer?.topRatedMovies?.results)
   }, [moviesReducer])
   
 
   const refreshList=()=>{
-   dispatch(fetchTrendingMovies())
-   dispatch(fetchUpcomingMovies())
-   dispatch(fetchTopRatedMovies())
+   dispatch(fetchTrendingMovies(1))
+   dispatch(fetchUpcomingMovies(1))
+   dispatch(fetchTopRatedMovies(1))
   }
   
 
@@ -55,21 +53,21 @@ export const HomeScreen=(props)=> {
           data={trendingMovies}
           title={'Trending Movies'}
           navigation={navigation}
-          type={'movie'}
+          type={1}
         />
         <MoviesRow
           key={'Upcoming'}
           data={upcomingMovies}
           title={'Upcoming Movies'}
           navigation={navigation}
-          type={'movie'}
+          type={2}
         />
         <MoviesRow
           key={'Top'}
           data={topRated}
           title={'Top Rated Movies'}
           navigation={navigation}
-          type={'movie'}
+          type={3}
         />
       </ScrollView>
     </View>

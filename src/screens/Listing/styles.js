@@ -1,6 +1,7 @@
 
 import {  StyleSheet } from "react-native";
 import { commonStyles } from "../../constants/commonStyles";
+import { widthPercentageToDP } from "react-native-responsive-screen";
 
 
 export const styles = StyleSheet.create({
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
   },
 
   titleBar: {
-    width: 40,
+    width: widthPercentageToDP(30),
     height: 5,
     backgroundColor:commonStyles.colors.orange,
     marginTop: 4,

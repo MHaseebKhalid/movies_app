@@ -4,6 +4,7 @@ import { genres } from '../../services/utils'
 import { View, TouchableWithoutFeedback, Text } from "react-native";
 import {MovieItem,MovieRating} from '../'
 import { commonStyles } from "../../constants/commonStyles";
+import moment from "moment";
 
 export const  MoviesPosterandInfo =(props)=>{
   const { data, navigation, type } = props;
@@ -26,7 +27,7 @@ export const  MoviesPosterandInfo =(props)=>{
         >
           <View style={{ flexDirection: "row" }}>
             <MovieItem item={data} height={150} width={100} navigation={navigation} type={type} />
-            <View style={{ margin: 16, justifyContent: "center", marginBottom: 24, flex: 1 }}>
+            <View style={{ margin: 16, marginBottom: 24, flex: 1 }}>
               <Text style={{ fontSize: 16, marginBottom: 10 }} numberOfLines={2}>
                 {data.name}
                 {data.title}
@@ -34,6 +35,10 @@ export const  MoviesPosterandInfo =(props)=>{
               <MovieRating rating={data.vote_average} textColor={commonStyles.colors.black} />
               <Text style={{ fontSize: 12, marginTop: 10, width: "75%" }}>
                 {Genres(data.genre_ids)}
+              </Text>
+
+              <Text style={{ fontSize: 12, marginTop: 10, width: "75%" }}>
+                {moment(data.release_date).format("MMM DD, yyyy")}
               </Text>
             </View>
           </View>

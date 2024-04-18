@@ -1,11 +1,11 @@
 import Config from 'react-native-config';
 import {getRequest} from '../';
 
-export const getTrendingMoviesList = () =>
-  getRequest(`/trending/movie/day?api_key=${Config.API_KEY}`);
+export const getTrendingMoviesList = (page) =>
+  getRequest(`/trending/movie/day?api_key=${Config.API_KEY}&page=${page}`);
 
-export const getUpcomingMoviesList = () =>
-  getRequest(`/movie/upcoming?api_key=${Config.API_KEY}`);
+export const getUpcomingMoviesList = (page) =>
+  getRequest(`/movie/upcoming?api_key=${Config.API_KEY}&page=${page}`);
 
-export const getTopRatedMoviesList = () =>
-  getRequest(`/movie/top_rated?api_key=${Config.API_KEY}`);
+export const getTopRatedMoviesList = (page) =>
+  getRequest(`/movie/top_rated?api_key=${Config.API_KEY}&page=${page}`);
