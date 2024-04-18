@@ -8,10 +8,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //Auth reducers
 import moviesReducer from './movieSlice/movieSlice';
 import moviesDetailReducer from './movieDetailSlice/movieDetailSlice';
+import movieSearchReducer from './movieSearchSlice/movieSearchSlice';
 
 const reducers = combineReducers({
     moviesReducer,
     moviesDetailReducer,
+    movieSearchReducer
 });
 
 const persistConfig = {

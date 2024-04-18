@@ -1,6 +1,20 @@
 
 import Config from "react-native-config";
 
+const API_KEY = Config.API_KEY;
+
+export const defaultQuery = {
+  api_key: API_KEY,
+  language: 'en-US',
+  // include_adult: true,
+  // region: "ID",
+};
+export const queryString = obj => {
+  return Object.entries(obj)
+    .map(([index, val]) => `${index}=${val}`)
+    .join('&');
+};
+
 export const getImageUrl = (path, key = "uri", width = "w500") => {
     return { [key]: `${Config.IMAGE_URL}${width}${path}` };
   };
