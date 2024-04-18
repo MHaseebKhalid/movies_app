@@ -1,5 +1,10 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+
+
+https://github.com/MHaseebKhalid/movies_app/assets/38959887/eb14f1dc-e3a3-4f03-b4fa-53a40a2e5525
+
+
 # Getting Started
 
 >**Note**: This app is dependant to .env you can create your own .env and add these 
