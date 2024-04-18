@@ -5,9 +5,12 @@ import { View, TouchableWithoutFeedback, Text } from "react-native";
 import {MovieItem,MovieRating} from '../'
 import { commonStyles } from "../../constants/commonStyles";
 import moment from "moment";
+import { fetchMovieDetails } from "../../redux/movieDetailSlice/movieDetailSlice";
+import { useDispatch } from "react-redux";
 
 export const  MoviesPosterandInfo =(props)=>{
   const { data, navigation, type } = props;
+  const dispatch = useDispatch();
 
   const Genres = (genreId = []) => {
     const text = genreId.map((item) => genres[item.toString()].name);
@@ -18,11 +21,10 @@ export const  MoviesPosterandInfo =(props)=>{
       <View style={{ marginHorizontal: 16, marginVertical: 8 }}>
         <TouchableWithoutFeedback
           onPress={() => {
-            // if (type === "tv") {
-            //   navigation.navigate("TVDetail", { id: data.id });
-            // } else {
-            //   navigation.navigate("MovieDetail", { id: data.id });
-            // }
+            dispatch(fetchMovieDetails(data.id)).then(()=>{
+              navigation.navigate("MovieDetailScreen", { id: data.id });
+            })
+          
           }}
         >
           <View style={{ flexDirection: "row" }}>

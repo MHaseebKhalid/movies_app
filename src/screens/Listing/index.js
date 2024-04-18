@@ -72,7 +72,7 @@ export const MovieListScreen=(props)=>{
       <View>
         <View style={{ flexDirection: "row", marginTop: 24 }}>
           <TouchableOpacity onPress={()=>navigation.goBack()}>
-          <AntDesign name="left" size={heightPercentageToDP(3)} colors={commonStyles.colors.black} style={{paddingHorizontal:12}}/>
+          <AntDesign name="left" size={heightPercentageToDP(3)} color={commonStyles.colors.black} style={{paddingHorizontal:12}}/>
           </TouchableOpacity>
           <Text style={styles.headerTitle}>{`${title}`}</Text>
           <View style={{ flex: 1, paddingRight: 12 }}></View>

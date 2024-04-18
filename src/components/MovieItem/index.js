@@ -3,17 +3,19 @@ import { View, StyleSheet, TouchableWithoutFeedback,Image } from "react-native";
 import FastImage from "react-native-fast-image";
 import {getImageUrl} from '../../services/utils'
 import { styles } from "./styles";
+import { fetchMovieDetails } from "../../redux/movieDetailSlice/movieDetailSlice";
+import { useDispatch } from "react-redux";
 
 
 export const MovieItem = ({ item, navigation, height, width, type }) => {
+  const dispatch=useDispatch()
   return (
     <TouchableWithoutFeedback
       onPress={() => {
-        if (type === "tv") {
-        //   navigation.navigate("TVDetail", { id: item.id });
-        } else {
-        //   navigation.navigate("MovieDetail", { id: item.id });
-        }
+        dispatch(fetchMovieDetails(item.id)).then(()=>{
+          navigation.navigate("MovieDetailScreen", { id: item.id });
+        });
+        
       }}
     >
       <View style={styles.imageContainer}>
