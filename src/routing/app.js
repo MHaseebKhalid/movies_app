@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { HomeScreen } from '../screens';
+import { HomeScreen,MovieListScreen } from '../screens';
+import HomeDrawer from './Drawer';
+import { commonStyles } from '../constants/commonStyles';
 
 
 const StackApp = createNativeStackNavigator();
 const navOptionHandler = () => ({
   headerShown: false,
-  animationEnabled: false,
+  headerTitle: false,
+  headerTransparent: true,
+  headerBackTitleVisible: false,
 });
 
 const App = () => {
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1,backgroundColor:commonStyles.colors.white }}>
       <NavigationContainer>
         <StackApp.Navigator
           detachInactiveScreens={false}
-          initialRouteName="HomeScreen"
+          initialRouteName="Home"
         >
           {/* Splah */}
           {/* <StackApp.Screen
@@ -27,16 +31,17 @@ const App = () => {
             options={navOptionHandler}
           /> */}
           {/* onBoarding */}
+          <StackApp.Screen name="Home" component={HomeDrawer} options={{ headerShown: false }} />
           <StackApp.Screen
-            name="HomeScreen"
-            component={HomeScreen}
+            name="MovieListScreen"
+            component={MovieListScreen}
             options={navOptionHandler}
           />
 
 
         </StackApp.Navigator>
       </NavigationContainer>
-    </View>
+    </SafeAreaView>
   );
 };
 export default App;
