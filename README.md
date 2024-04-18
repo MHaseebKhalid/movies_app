@@ -1,8 +1,8 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 
 
-https://github.com/MHaseebKhalid/movies_app/assets/38959887/eb14f1dc-e3a3-4f03-b4fa-53a40a2e5525
+https://github.com/MHaseebKhalid/movies_app/assets/38959887/2dc2abfc-caa8-4342-9c61-63b8a14c89b3
+
 
 
 # Getting Started
